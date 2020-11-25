@@ -1,15 +1,15 @@
 # audio-transcriber-docker
 
-動画・音声ファイルの音声を`SpeechRecognition`を使って自動的に書き起こす。
+[日本語のREADMEはこちらから](README-ja.md)
+
+Automatically transcribe the audio of video / audio files using `Speech Recognition`.
 
 ## Warning / Disclaimer
 
-**このプロジェクトを使用したことによって引き起こされた問題に関して開発者は一切の責任を負いません。**  
 **The author is not responsible for any problems caused by the user using this project.**
 
-というか、それなりに真面目なことに使うのであれば[GCPのSpeech-to-Text](https://cloud.google.com/speech-to-text)とかを使いましょう。
-
-一切のサポートはしません。(no support)
+Or rather, if you want to use it seriously, use [Google Cloud Platform Speech-to-Text](https://cloud.google.com/speech-to-text).  
+We do not provide any support.
 
 ## Installation
 
@@ -17,58 +17,57 @@
 
 `git clone https://github.com/book000/audio-transcriber-docker.git`
 
-### 2. Run start-mount.bat or start-mount.sh (First)
+### 2. Run `start-mount.bat` or `start-mount.sh` (First)
 
-Windowsなら`start-mount.bat`、Linuxなら`start-mount.sh`を実行する。
-このプログラム達は`user-dir`フォルダをマウントする。
+Run `start-mount.bat` on Windows, `start-mount.sh` on Linux.  
+These programs mount the `user-dir` folder.
 
-出てくる質問は`DISPLAY`と`HOST_USER_DIR`(Windowsのみ)だけ注意すればそれ以外はそのままEnterでも良い
+If you pay attention only to `DISPLAY` and `HOST_USER_DIR` (Windows only), you can just enter the other questions.
 
 ### 3. Permit using microphone
 
-初期設定として、マイクの使用許可と使用するマイクの設定が必要。最初以外でも音声が正常に認識されないなどあるのであればこの作業をもう一度実行する必要がある。
+As an initial setting, you need to set the microphone permission and the microphone to be used. If the audio is not recognized correctly the first time, you need to perform this work again.
 
-#### 3-1. `Allow`を押して許可
+#### 3-1. Press `Allow` to allow
 
 ![](images/1.png)
 
-#### 3-2. ビデオマークを押し、`Microphone`欄を`Virtual Source Virtual Mic on Monitor of Virtual_Microphone_Output`に変更
+#### 3-2. Press the video symbol and change the `Microphone` field to `Virtual Source Virtual Mic on Monitor of Virtual_Microphone_Output`
 
 ![](images/2.png)
 
-### 4. 閉じる
+### 4. Close the window
 
-`Ctrl+C`をターミナルで押し、処理を中断する。必要であれば`docker stop audio-transcriber`, `docker rm audio-transcriber`を実行。
+Press `Ctrl+C` at the terminal to abort the process. Run `docker stop audio-transcriber`, `docker rm audio-transcriber` if necessary.
 
 ## Usage
 
-Installationを終えたあと、普通に使う場合
+After Installation, if you use it normally
 
-### 1. Run start.bat or start.sh
+### 1. Run `start.bat` or `start.sh`
 
-Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。
+Run `start.bat` on Windows, `start.sh` on Linux.
 
-出てくる質問は以下。
+The questions that come up are below.
 
-- Movie or Audio File Path
-  - 読み込むファイル(動画・音声ファイル)を指定。`mp4`, `m4v`, `webm`など`ffmpeg`で変換できるものならなんでも良い
-- DockerName
-  - Dockerのコンテナ名を指定。既存のコンテナ名を指定した場合確認せず`stop`と`rm`をするので注意。
-  - 指定せずEnterした場合`audio-transcriber`を使用。
-- DISPLAY
-  - DISPLAY(映像出力先)の指定。Docker内には基本的に映像出力先がないので、ホストのDISPLAYを指定(`192.168.0.100:0`など)
+- `Movie or Audio File Path`
+  - Specify the files to be loaded (video and audio files). `mp4`, `m4v`, `webm` and anything else that can be converted with `ffmpeg`
+- `DockerName`
+  - Specify the name of the container in Docker. Note that if you specify an existing container name, it will be `stop` and `rm` without checking.
+  - Use `audio-transcriber` if you enter without specifying.
+- `DISPLAY`
+  - Specifies the DISPLAY of the host (e.g., `192.168.0.100:0`) because there is no video output destination in the Docker.
 
-`TeraTerm`や`Mobaxterm`でX11の受け先を作っておくこと。
+Make a destination for X11 with `TeraTerm` or `Mobaxterm`.
 
-### 2. 処理
+### 2. Processing
 
-Chromeが起動してごにょごにょ動く。
+After Chrome is launched, it works.
 
-### 3. `audio-text.txt`を見る
+### 3. View the `audio-text.txt`
 
-基本的に`audio-text.txt`に書き込まれるので、それ。
+It is written to `audio-text.txt`.
 
-## ライセンス / License
+## License
 
-このプロジェクトのライセンスは[MIT License](https://github.com/book000/audio-transcriber-docker/blob/master/LICENSE)です。  
 The license for this project is [MIT License](https://github.com/book000/audio-transcriber-docker/blob/master/LICENSE).
