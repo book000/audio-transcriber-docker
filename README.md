@@ -1,6 +1,6 @@
 # audio-transcriber-docker
 
-動画・音声ファイルの音声を`webkitSpeechRecognition`を使って自動的に書き起こす。
+動画・音声ファイルの音声を`SpeechRecognition`を使って自動的に書き起こす。
 
 ## Warning / Disclaimer
 
