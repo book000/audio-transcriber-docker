@@ -16,8 +16,7 @@ ffmpeg -y -i %AUDIO_FILE% audio.wav
 docker build -t audio-transcriber .
 docker stop %DOCKER_NAME%
 docker rm %DOCKER_NAME%
-del user-dir\audio-text.txt
-docker run -e DISPLAY="%DISPLAY%" --name %DOCKER_NAME% -it audio-transcriber
-move user-dir\audio-text.txt .
+mkdir %~dp0output
+docker run -v "%~dp0output\:/opt/output/" -e DISPLAY="%DISPLAY%" --name %DOCKER_NAME% -it audio-transcriber
 docker rm %DOCKER_NAME%
 pause

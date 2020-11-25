@@ -21,9 +21,9 @@
 ### 2. `start-mount.bat`または`start-mount.sh`を実行 (初めての場合)
 
 Windowsなら`start-mount.bat`、Linuxなら`start-mount.sh`を実行する。  
-このプログラム達は`user-dir`フォルダをマウントする。
+このプログラム達は`user-dir`フォルダと`output`フォルダをマウントする。
 
-出てくる質問は`DISPLAY`と`HOST_USER_DIR`(Windowsのみ)だけ注意すればそれ以外はそのままEnterでも良い
+出てくる質問は`DISPLAY`だけ注意すればそれ以外はそのままEnterでも良い
 
 ### 3. マイクの使用許可
 
@@ -47,7 +47,8 @@ Windowsなら`start-mount.bat`、Linuxなら`start-mount.sh`を実行する。
 
 ### 1. `start.bat`または`start.sh`を実行
 
-Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。
+Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。  
+このプログラム達は`output`フォルダをマウントする。
 
 出てくる質問は以下。
 
@@ -65,9 +66,9 @@ Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。
 
 Chromeが起動してごにょごにょ動く。
 
-### 3. `audio-text.txt`を見る
+### 3. `output/{DateTime}.txt`を見る
 
-基本的に`audio-text.txt`に書き込まれるので、それ。
+基本的に`output/{DateTime}.txt`に書き込まれるので、それ。
 
 ## ライセンス / License
 

@@ -20,9 +20,9 @@ We do not provide any support.
 ### 2. Run `start-mount.bat` or `start-mount.sh` (First)
 
 Run `start-mount.bat` on Windows, `start-mount.sh` on Linux.  
-These programs mount the `user-dir` folder.
+These programs mount the `user-dir` folder and `output` folder.
 
-If you pay attention only to `DISPLAY` and `HOST_USER_DIR` (Windows only), you can just enter the other questions.
+If you pay attention only to `DISPLAY`, you can just enter the other questions.
 
 ### 3. Permit using microphone
 
@@ -46,7 +46,8 @@ After Installation, if you use it normally
 
 ### 1. Run `start.bat` or `start.sh`
 
-Run `start.bat` on Windows, `start.sh` on Linux.
+Run `start.bat` on Windows, `start.sh` on Linux.  
+These programs mount the `output` folder.
 
 The questions that come up are below.
 
@@ -64,9 +65,9 @@ Make a destination for X11 with `TeraTerm` or `Mobaxterm`.
 
 After Chrome is launched, it works.
 
-### 3. View the `audio-text.txt`
+### 3. View the `output/{DateTime}.txt`
 
-It is written to `audio-text.txt`.
+It is written to `output/{DateTime}.txt`.
 
 ## License
 

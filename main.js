@@ -28,9 +28,7 @@ const options = {
         "--mute-audio"
     ],
 };
-if (fs.existsSync("/opt/user-dir/audio-text.txt")) {
-    fs.unlinkSync("/opt/user-dir/audio-text.txt");
-}
+const now = new Date().toISOString().replace(/:/, "-");
 puppeteer.launch(options).then(async browser => {
     console.log("Opened browser");
     const page = (await browser.pages())[0];
@@ -38,7 +36,7 @@ puppeteer.launch(options).then(async browser => {
 
     await page.exposeFunction("handleRecognized", text => {
         console.log(text);
-        fs.appendFile("/opt/user-dir/audio-text.txt", `[${toHHMMSS((Date.now() - start) / 1000)}] ${text}\n`, (err) => {
+        fs.appendFile(`/opt/output/${now}.txt`, `[${toHHMMSS((Date.now() - start) / 1000)}] ${text}\n`, (err) => {
             if (err) {
                 console.error(err);
             }
