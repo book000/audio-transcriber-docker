@@ -4,5 +4,5 @@
   "timezone": "Asia/Tokyo",
   "dependencyDashboard": false,
   "automerge": true,
-  "branchConcurrentLimit": 0,
+  "branchConcurrentLimit": 0
 }
