@@ -1,4 +1,4 @@
-FROM node:17-slim
+FROM node:21-slim
 
 RUN apt-get -qq update && apt-get install -y pulseaudio fonts-ipafont
 RUN yarn add puppeteer
