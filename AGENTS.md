@@ -25,3 +25,21 @@
 - ログに機密情報を出力しない。
 
 ## リポジトリ固有
+- **type**: Docker Application
+- **entry_point**: main.js via entrypoint.sh
+**features:**
+  - Automated audio/video transcription
+  - Docker container with browser automation
+  - X11 display support for GUI
+  - Virtual audio output capture
+**setup_steps:**
+  - Mount volumes for input/output
+  - Configure microphone permissions
+  - Set DISPLAY variable
+  - Process video/audio files
+- **output**: text file in output/{DateTime}.txt
+**supported_formats:**
+  - mp4
+  - m4v
+  - webm
+  - ffmpeg-convertible formats

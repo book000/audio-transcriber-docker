@@ -15,7 +15,19 @@
 - 日本語と英数字の間には半角スペースを入れる。
 
 ## プロジェクト概要
-- 目的: [日本語のREADMEはこちらから](README-ja.md)
+Docker-based audio transcription tool for video/audio files using Puppeteer, Chrome browser, and SpeechRecognition API.
+
+### 技術スタック
+- **言語**: JavaScript, Bash, Shell
+- **フレームワーク**: Puppeteer, Node.js
+- **パッケージマネージャー**: yarn (npm equivalent)
+- **主要な依存関係**:
+  - runtime:
+    - node@17-slim
+    - puppeteer
+    - google-chrome
+    - pulseaudio
+    - ffmpeg
 
 ## コーディング規約
 - フォーマット: 既存設定（ESLint / Prettier / formatter）に従う。
@@ -23,9 +35,17 @@
 - コメント言語: 日本語
 - エラーメッセージ: 英語
 
-## 開発コマンド
+### 開発コマンド
 ```bash
-# README を確認してください
+# install
+git clone && run start-mount.sh or start-mount.bat (first time)
+
+# usage
+run start.sh or start.bat for normal usage
+
+# build
+docker build .
+
 ```
 
 ## 注意事項
@@ -34,3 +54,21 @@
 - 既存のプロジェクトルールがある場合はそれを優先する。
 
 ## リポジトリ固有
+- **type**: Docker Application
+- **entry_point**: main.js via entrypoint.sh
+**features:**
+  - Automated audio/video transcription
+  - Docker container with browser automation
+  - X11 display support for GUI
+  - Virtual audio output capture
+**setup_steps:**
+  - Mount volumes for input/output
+  - Configure microphone permissions
+  - Set DISPLAY variable
+  - Process video/audio files
+- **output**: text file in output/{DateTime}.txt
+**supported_formats:**
+  - mp4
+  - m4v
+  - webm
+  - ffmpeg-convertible formats

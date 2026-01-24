@@ -13,7 +13,19 @@
 - 前提・仮定・不確実性を明示し、仮定を事実のように扱わない。
 
 ## プロジェクト概要
-- 目的: [日本語のREADMEはこちらから](README-ja.md)
+Docker-based audio transcription tool for video/audio files using Puppeteer, Chrome browser, and SpeechRecognition API.
+
+### 技術スタック
+- **言語**: JavaScript, Bash, Shell
+- **フレームワーク**: Puppeteer, Node.js
+- **パッケージマネージャー**: yarn (npm equivalent)
+- **主要な依存関係**:
+  - runtime:
+    - node@17-slim
+    - puppeteer
+    - google-chrome
+    - pulseaudio
+    - ffmpeg
 
 ## 重要ルール
 - 会話言語: 日本語
@@ -42,25 +54,51 @@
 - TypeScript 使用時は `skipLibCheck` で回避しない。
 - 関数やインターフェースには docstring（JSDoc など）を記載する。
 
+### コーディング規約
+- **language**: JavaScript (Node.js)
+- **runtime**: Docker container
+- **audio**: pulseaudio for audio management
+
 ## 相談ルール
 - Codex CLI: 実装レビュー、局所設計、整合性確認に使う。
 - Gemini CLI: 外部仕様や最新情報の確認に使う。
 - 他エージェントの指摘は黙殺せず、採用または理由を明記して不採用とする。
 
-## 開発コマンド
+### 開発コマンド
 ```bash
-# README を確認してください
+# install
+git clone && run start-mount.sh or start-mount.bat (first time)
+
+# usage
+run start.sh or start.bat for normal usage
+
+# build
+docker build .
+
 ```
 
-## アーキテクチャと主要ファイル
+### プロジェクト構造
+**ルートファイル:**
+- `Dockerfile`
+- `main.js`
+- `entrypoint.sh`
+- `start.sh`
+- `start-mount.sh`
+- `start-mount.bat`
+
+**主要ディレクトリ:**
+- `images/`
 
 ## 実装パターン
+- 既存のコードパターンに従う。
+- プロジェクト固有の実装ガイドラインがある場合はそれに従う。
 
 ## テスト
 - 方針: 変更内容に応じてテストを追加する。
 
 ## ドキュメント更新ルール
 - 更新タイミング: 実装確定後、同一コミットまたは追加コミットで更新する。
+- README、API ドキュメント、コメント等は常に最新状態を保つ。
 
 ## 作業チェックリスト
 
@@ -91,3 +129,21 @@
 6. PR 本文の崩れがないことを確認する。
 
 ## リポジトリ固有
+- **type**: Docker Application
+- **entry_point**: main.js via entrypoint.sh
+**features:**
+  - Automated audio/video transcription
+  - Docker container with browser automation
+  - X11 display support for GUI
+  - Virtual audio output capture
+**setup_steps:**
+  - Mount volumes for input/output
+  - Configure microphone permissions
+  - Set DISPLAY variable
+  - Process video/audio files
+- **output**: text file in output/{DateTime}.txt
+**supported_formats:**
+  - mp4
+  - m4v
+  - webm
+  - ffmpeg-convertible formats
