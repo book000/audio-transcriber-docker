@@ -19,7 +19,7 @@ Gemini CLI 向けのコンテキストと作業方針を定義する。
 
 ## コーディング規約
 - フォーマット: 既存のコードに従う
-- 命名規則: 既存コードでは snake_case と camelCase が混在しているため、既存コードのスタイルに従う
+- 命名規則: 既存コードでは snake_case（例: `start_recognition`）と camelCase（例: `toHHMMSS`, `handleRecognized`）が混在しているため、既存コードのスタイルに従い、文脈に応じて適切に使い分ける
 - コメント言語: 日本語
 - エラーメッセージ言語: 英語
 
@@ -38,8 +38,8 @@ docker build -t audio-transcriber .
 - 認証情報のコミット禁止。
 - ログへの機密情報出力禁止。
 - 既存ルールの優先。
-- Web Speech API は Chrome の機能に依存するため、Puppeteer の設定が重要。
+- Web Speech API は Chrome が提供する `webkitSpeechRecognition` を利用するため、Puppeteer で Chrome ブラウザを起動し、ブラウザコンテキストで音声認識を実行して `page.exposeFunction` で結果を Node.js 側に渡す実装パターンを前提とする。
 
 ## リポジトリ固有
 - `main.js` が中心的なロジックを保持している。
-- Dockerfile には Chrome や Pulseaudio のインストールが含まれており、環境構築が重要である。
+- Dockerfile には Chrome や PulseAudio のインストールが含まれており、環境構築が重要である。
