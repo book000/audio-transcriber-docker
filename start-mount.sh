@@ -5,8 +5,8 @@ echo -n "DockerName(Default: audio-transcriber): "
 read AUDIO_FILE
 echo -n "DISPLAY: "
 read _DISPLAY
-IF "%DOCKER_NAME%"=="" DOCKER_NAME=audio-transcriber
-IF "%_DISPLAY%"=="" _DISPLAY=$DISPLAY
+[ -z "$DOCKER_NAME" ] && DOCKER_NAME=audio-transcriber
+[ -z "$_DISPLAY" ] && _DISPLAY=$DISPLAY
 
 echo
 echo AUDIO_FILE: $AUDIO_FILE
@@ -21,7 +21,7 @@ ffmpeg -y -i $AUDIO_FILE audio.wav
 docker build -t audio-transcriber .
 docker stop $DOCKER_NAME
 docker rm $DOCKER_NAME
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
+SCRIPT_DIR=$(cd "$(dirname "$0")" || exit; pwd)
 mkdir -p $SCRIPT_DIR/user-dir
 mkdir -p $SCRIPT_DIR/output
 docker run -v "$SCRIPT_DIR/user-dir/:/opt/user-dir/" -v "$SCRIPT_DIR/output:/opt/output/" -e DISPLAY="$DISPLAY" --name $DOCKER_NAME -it audio-transcriber
