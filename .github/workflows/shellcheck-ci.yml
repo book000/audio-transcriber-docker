@@ -1,0 +1,19 @@
+# シェルスクリプトを ShellCheck で検査する
+
+name: ShellCheck
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  merge_group:
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    uses: book000/templates/.github/workflows/reusable-shellcheck-ci.yml@master
