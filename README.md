@@ -1,15 +1,15 @@
 # audio-transcriber-docker
 
-[日本語のREADMEはこちらから](README-ja.md)
+[日本語版 README](README-ja.md) (Japanese translation)
 
-Automatically transcribe the audio of video / audio files using `Speech Recognition`.
+Automatically transcribes the speech in video and audio files. A Docker container plays the audio into a virtual microphone and Chrome's Web Speech API (`webkitSpeechRecognition`, language `ja`) recognizes it, driven by Puppeteer.
 
 ## Warning / Disclaimer
 
 **The author is not responsible for any problems caused by the user using this project.**
 
-Or rather, if you want to use it seriously, use [Google Cloud Platform Speech-to-Text](https://cloud.google.com/speech-to-text).  
-We do not provide any support.
+If you need reliable transcription, use [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text) instead.  
+No support is provided.
 
 ## Installation
 
@@ -22,11 +22,11 @@ We do not provide any support.
 Run `start-mount.bat` on Windows, `start-mount.sh` on Linux.  
 These programs mount the `user-dir` folder and `output` folder.
 
-If you pay attention only to `DISPLAY`, you can just enter the other questions.
+Enter a media file path and your `DISPLAY`; the container name can be left at its default (see [Usage](#1-run-startbat-or-startsh) for the questions).
 
 ### 3. Permit using microphone
 
-As an initial setting, you need to set the microphone permission and the microphone to be used. If the audio is not recognized correctly the first time, you need to perform this work again.
+Chrome needs the microphone permission and the right input device. Do this on the first run, and again if the audio is not recognized correctly.
 
 #### 3-1. Press `Allow` to allow
 
@@ -38,11 +38,11 @@ As an initial setting, you need to set the microphone permission and the microph
 
 ### 4. Close the window
 
-Press `Ctrl+C` at the terminal to abort the process. Run `docker stop audio-transcriber`, `docker rm audio-transcriber` if necessary.
+Press `Ctrl+C` in the terminal to abort. If necessary, run `docker stop audio-transcriber` and `docker rm audio-transcriber`.
 
 ## Usage
 
-After Installation, if you use it normally
+For normal use after the installation steps:
 
 ### 1. Run `start.bat` or `start.sh`
 
@@ -52,23 +52,23 @@ These programs mount the `output` folder.
 The questions that come up are below.
 
 - `Movie or Audio File Path`
-  - Specify the files to be loaded (video and audio files). `mp4`, `m4v`, `webm` and anything else that can be converted with `ffmpeg`
+  - The video or audio file to transcribe. `mp4`, `m4v`, `webm` and anything else `ffmpeg` can convert. The script converts it to `audio.wav` with `ffmpeg`, so `ffmpeg` must be installed on the host.
 - `DockerName`
-  - Specify the name of the container in Docker. Note that if you specify an existing container name, it will be `stop` and `rm` without checking.
-  - Use `audio-transcriber` if you enter without specifying.
+  - Specify the name of the container in Docker. Note that an existing container with this name is stopped and removed without confirmation.
+  - Defaults to `audio-transcriber`.
 - `DISPLAY`
-  - Specifies the DISPLAY of the host (e.g., `192.168.0.100:0`) because there is no video output destination in the Docker.
+  - The host's X11 display (e.g., `192.168.0.100:0`). The container has no display of its own, and Chrome runs with a window.
 
-Make a destination for X11 with `TeraTerm` or `Mobaxterm`.
+Set up an X11 server on the host first, for example with `TeraTerm` or `MobaXterm`.
 
 ### 2. Processing
 
-After Chrome is launched, it works.
+Chrome starts inside the container, the audio is played into the virtual microphone, and the recognized text is printed to the terminal.
 
 ### 3. View the `output/{DateTime}.txt`
 
-It is written to `output/{DateTime}.txt`.
+Each final result is appended to `output/{DateTime}.txt` as `[HH:MM:SS] text`, where `{DateTime}` is the start time in ISO 8601 format with only the first `:` replaced by `-`.
 
 ## License
 
-The license for this project is [MIT License](https://github.com/book000/audio-transcriber-docker/blob/master/LICENSE).
+The license for this project is [MIT License](LICENSE).

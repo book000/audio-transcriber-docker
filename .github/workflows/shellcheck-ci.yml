@@ -1,4 +1,4 @@
-# シェルスクリプトを ShellCheck で検査する
+# Lint shell scripts with ShellCheck
 
 name: ShellCheck
 
