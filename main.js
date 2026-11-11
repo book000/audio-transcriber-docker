@@ -16,7 +16,6 @@ const options = {
     "executablePath": "google-chrome",
     "headless": false,
     "slowMo": 10,
-    //"devtools": true,
     args: [
         "--no-sandbox",
         "--lang=ja-JP",
@@ -28,6 +27,7 @@ const options = {
         "--mute-audio"
     ],
 };
+// Start time as ISO 8601 with only the first ":" replaced; used as the output file name.
 const now = new Date().toISOString().replace(/:/, "-");
 puppeteer.launch(options).then(async browser => {
     console.log("Opened browser");
@@ -63,6 +63,7 @@ puppeteer.launch(options).then(async browser => {
         await browser.close();
     });
 
+    // Runs in the browser context, where webkitSpeechRecognition and window.handleRecognized (exposed above) exist.
     await page.evaluate(async () => {
         function start_recognition() {
             recognition = new webkitSpeechRecognition();
@@ -78,6 +79,7 @@ puppeteer.launch(options).then(async browser => {
                     }
                 }
             };
+            // Restart on every end event so recognition keeps running until the browser is closed.
             recognition.onend = function (event) {
                 console.log("onend", event);
                 return start_recognition();
@@ -105,7 +107,7 @@ puppeteer.launch(options).then(async browser => {
         start_recognition();
     });
     function toHHMMSS(sec) {
-        var sec_num = parseInt(sec, 10); // don't forget the second param
+        var sec_num = parseInt(sec, 10);
         var hours = Math.floor(sec_num / 3600);
         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
         var seconds = sec_num - (hours * 3600) - (minutes * 60);
@@ -121,5 +123,4 @@ puppeteer.launch(options).then(async browser => {
         }
         return hours + ':' + minutes + ':' + seconds;
     }
-    //await browser.close();
 });

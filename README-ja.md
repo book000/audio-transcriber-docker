@@ -1,16 +1,15 @@
 # audio-transcriber-docker
 
-[Click here for English README](README.md)
+[English README](README.md) (メインの README)
 
-動画・音声ファイルの音声を`SpeechRecognition`を使って自動的に書き起こす。
+動画・音声ファイルの音声を自動的に書き起こす。Docker コンテナ内で音声を仮想マイクへ再生し、Puppeteer で操作する Chrome の Web Speech API (`webkitSpeechRecognition`、言語は `ja`) で認識する。
 
 ## 警告・免責事項
 
 **このプロジェクトを使用したことによって引き起こされた問題に関して開発者は一切の責任を負いません。**
 
-というか、それなりに真面目なことに使うのであれば[Google Cloud PlatformのSpeech-to-Text](https://cloud.google.com/speech-to-text)とかを使いましょう。
-
-一切のサポートはしません。
+確実な書き起こしが必要なら、代わりに [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text) を使ってください。  
+サポートは提供しません。
 
 ## インストール
 
@@ -23,11 +22,11 @@
 Windowsなら`start-mount.bat`、Linuxなら`start-mount.sh`を実行する。  
 このプログラム達は`user-dir`フォルダと`output`フォルダをマウントする。
 
-出てくる質問は`DISPLAY`だけ注意すればそれ以外はそのままEnterでも良い
+メディアファイルのパスと `DISPLAY` を入力する。コンテナ名は既定値のままでよい (質問の内容は[使い方](#1-startbatまたはstartshを実行)を参照)。
 
 ### 3. マイクの使用許可
 
-初期設定として、マイクの使用許可と使用するマイクの設定が必要。最初以外でも音声が正常に認識されないなどあるのであればこの作業をもう一度実行する必要がある。
+Chrome にマイクの使用許可と入力デバイスの設定が必要。初回に行い、音声が正常に認識されない場合は再度行う。
 
 #### 3-1. `Allow`を押して許可
 
@@ -43,7 +42,7 @@ Windowsなら`start-mount.bat`、Linuxなら`start-mount.sh`を実行する。
 
 ## 使い方
 
-インストールを終えたあと、普通に使う場合
+インストール後の通常の使い方。
 
 ### 1. `start.bat`または`start.sh`を実行
 
@@ -53,23 +52,23 @@ Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。
 出てくる質問は以下。
 
 - `Movie or Audio File Path`
-  - 読み込むファイル(動画・音声ファイル)を指定。`mp4`, `m4v`, `webm`など`ffmpeg`で変換できるものならなんでも良い
+  - 書き起こす動画・音声ファイル。`mp4`、`m4v`、`webm` など `ffmpeg` で変換できるものならなんでもよい。スクリプトが `ffmpeg` で `audio.wav` に変換するため、ホストに `ffmpeg` が必要。
 - `DockerName`
-  - Dockerのコンテナ名を指定。既存のコンテナ名を指定した場合確認せず`stop`と`rm`をするので注意。
-  - 指定せずEnterした場合`audio-transcriber`を使用。
+  - Docker のコンテナ名。同名の既存コンテナは確認なしで停止・削除されるので注意。
+  - 既定値は `audio-transcriber`。
 - `DISPLAY`
-  - DISPLAY(映像出力先)の指定。Docker内には基本的に映像出力先がないので、ホストのDISPLAYを指定(`192.168.0.100:0`など)
+  - ホストの X11 ディスプレイ (`192.168.0.100:0` など)。コンテナには独自のディスプレイがなく、Chrome はウィンドウ付きで動作する。
 
-`TeraTerm`や`Mobaxterm`でX11の受け先を作っておくこと。
+事前に `TeraTerm` や `MobaXterm` などでホスト側に X11 サーバーを用意しておくこと。
 
 ### 2. 処理
 
-Chromeが起動してごにょごにょ動く。
+コンテナ内で Chrome が起動し、音声が仮想マイクへ再生され、認識結果が端末に表示される。
 
 ### 3. `output/{DateTime}.txt`を見る
 
-基本的に`output/{DateTime}.txt`に書き込まれるので、それ。
+確定した認識結果が `[HH:MM:SS] テキスト` の形式で `output/{DateTime}.txt` に追記される。`{DateTime}` は開始時刻 (ISO 8601 形式。最初の `:` のみ `-` に置換)。
 
-## ライセンス / License
+## ライセンス
 
-このプロジェクトのライセンスは[MIT License](https://github.com/book000/audio-transcriber-docker/blob/master/LICENSE)です。
+このプロジェクトのライセンスは [MIT License](LICENSE) です。
