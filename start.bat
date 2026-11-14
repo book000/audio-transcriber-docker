@@ -14,6 +14,7 @@ echo.
 pause
 ffmpeg -y -i %AUDIO_FILE% audio.wav
 
+if not exist "%~dp0user-dir" mkdir "%~dp0user-dir"
 docker build -t audio-transcriber .
 docker stop %DOCKER_NAME%
 docker rm %DOCKER_NAME%
