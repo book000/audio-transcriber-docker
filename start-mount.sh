@@ -2,7 +2,7 @@
 echo -n "Movie or Audio File Path: "
 read AUDIO_FILE
 echo -n "DockerName(Default: audio-transcriber): "
-read AUDIO_FILE
+read DOCKER_NAME
 echo -n "DISPLAY: "
 read _DISPLAY
 [ -z "$DOCKER_NAME" ] && DOCKER_NAME=audio-transcriber
