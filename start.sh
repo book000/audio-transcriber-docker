@@ -11,7 +11,7 @@ read _DISPLAY
 echo
 echo AUDIO_FILE: $AUDIO_FILE
 echo DOCKER_NAME: $DOCKER_NAME
-echo DISPLAY: $DISPLAY
+echo DISPLAY: $_DISPLAY
 echo
 
 echo "Press Any Key to continue."
@@ -24,7 +24,7 @@ docker rm $DOCKER_NAME
 SCRIPT_DIR=$(cd "$(dirname "$0")" || exit; pwd)
 mkdir -p $SCRIPT_DIR/user-dir
 mkdir -p $SCRIPT_DIR/output
-docker run -v "$SCRIPT_DIR/output/:/opt/output/" -e DISPLAY="$DISPLAY" --name $DOCKER_NAME -it audio-transcriber
+docker run -v "$SCRIPT_DIR/output/:/opt/output/" -e DISPLAY="$_DISPLAY" --name $DOCKER_NAME -it audio-transcriber
 docker rm $DOCKER_NAME
 echo "Press Any Key to continue."
 read
