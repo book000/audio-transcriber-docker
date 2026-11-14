@@ -58,6 +58,7 @@ The questions that come up are below.
   - Defaults to `audio-transcriber`.
 - `DISPLAY`
   - The host's X11 display (e.g., `192.168.0.100:0`). The container has no display of its own, and Chrome runs with a window.
+  - The Windows launchers (`start.bat` / `start-mount.bat`) default to `localhost:0` when left empty.
 
 Set up an X11 server on the host first, for example with `TeraTerm` or `MobaXterm`.
 

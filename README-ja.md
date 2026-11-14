@@ -58,6 +58,7 @@ Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。
   - 既定値は `audio-transcriber`。
 - `DISPLAY`
   - ホストの X11 ディスプレイ (`192.168.0.100:0` など)。コンテナには独自のディスプレイがなく、Chrome はウィンドウ付きで動作する。
+  - Windows 用ランチャー (`start.bat` / `start-mount.bat`) では、空欄のまま Enter を押すと `localhost:0` が使われる。
 
 事前に `TeraTerm` や `MobaXterm` などでホスト側に X11 サーバーを用意しておくこと。
 
