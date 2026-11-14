@@ -3,6 +3,7 @@ set /P AUDIO_FILE="Movie or Audio File Path: "
 set /P DOCKER_NAME="DockerName(Default: audio-transcriber): "
 set /P DISPLAY="DISPLAY(Default: localhost:0): "
 IF "%DOCKER_NAME%"=="" set DOCKER_NAME=audio-transcriber
+IF "%DISPLAY%"=="" set DISPLAY=localhost:0
 
 echo.
 echo AUDIO_FILE: %AUDIO_FILE%
