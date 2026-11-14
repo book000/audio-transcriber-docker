@@ -18,11 +18,11 @@ echo "Press Any Key to continue."
 read
 ffmpeg -y -i $AUDIO_FILE audio.wav
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" || exit; pwd)
+mkdir -p $SCRIPT_DIR/user-dir
 docker build -t audio-transcriber .
 docker stop $DOCKER_NAME
 docker rm $DOCKER_NAME
-SCRIPT_DIR=$(cd "$(dirname "$0")" || exit; pwd)
-mkdir -p $SCRIPT_DIR/user-dir
 mkdir -p $SCRIPT_DIR/output
 docker run -v "$SCRIPT_DIR/user-dir/:/opt/user-dir/" -v "$SCRIPT_DIR/output:/opt/output/" -e DISPLAY="$DISPLAY" --name $DOCKER_NAME -it audio-transcriber
 docker rm $DOCKER_NAME

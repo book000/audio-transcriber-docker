@@ -30,7 +30,7 @@ shellcheck *.sh      # what CI runs on the shell scripts
 
 - `main.js`: Puppeteer script. Launches `google-chrome` (non-headless, on the host's `DISPLAY`), opens the external page `https://book000.github.com/audio-transcriber`, plays the file with `paplay --device=MicOutput`, and starts `webkitSpeechRecognition` in the page. Recognized text is passed back through `page.exposeFunction("handleRecognized")` and appended to the output file. The browser closes when `paplay` exits.
 - `entrypoint.sh`: container entrypoint. Starts PulseAudio, creates the `MicOutput` null sink and `VirtualMic` source, then runs `main.js` on `/opt/media/audio.wav`.
-- `Dockerfile`: a Node.js slim base image plus PulseAudio, Japanese fonts, Puppeteer and Google Chrome. `audio.wav` (written by the scripts with `ffmpeg`) and `user-dir/` must exist in the build context. The scripts create `user-dir/` only after `docker build`, so create it beforehand on a fresh clone.
+- `Dockerfile`: a Node.js slim base image plus PulseAudio, Japanese fonts, Puppeteer and Google Chrome. `audio.wav` (written by the scripts with `ffmpeg`) and `user-dir/` must exist in the build context. The start scripts create `user-dir/` before `docker build`, but a manual `docker build` on a fresh clone requires creating `user-dir/` first.
 - `start.sh`, `start-mount.sh`, `start.bat`, `start-mount.bat`: host-side launchers.
 - `README.md` / `README-ja.md`: user documentation.
 
