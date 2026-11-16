@@ -13,7 +13,7 @@ const {
     spawn
 } = require('child_process')
 const options = {
-    "executablePath": "google-chrome",
+    "executablePath": "/usr/bin/google-chrome",
     "headless": false,
     "slowMo": 10,
     args: [

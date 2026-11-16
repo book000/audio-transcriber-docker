@@ -1,0 +1,36 @@
+# Build the Docker image to catch build regressions
+
+name: Docker build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  docker-build:
+    name: Docker build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The build context needs these (both are git-ignored)
+      - name: Create build context placeholders
+        run: mkdir user-dir && touch audio.wav
+
+      - name: Build image
+        run: docker build -t audio-transcriber-test .
