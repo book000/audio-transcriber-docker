@@ -2,6 +2,6 @@
   "name": "audio-transcriber-docker",
   "private": true,
   "dependencies": {
-    "puppeteer": "25.17.0"
+    "puppeteer": "25.18.1"
   }
 }
