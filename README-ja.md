@@ -68,7 +68,7 @@ Windowsなら`start.bat`、Linuxなら`start.sh`を実行する。
 
 ### 3. `output/{DateTime}.txt`を見る
 
-確定した認識結果が `[HH:MM:SS] テキスト` の形式で `output/{DateTime}.txt` に追記される。`{DateTime}` は開始時刻 (ISO 8601 形式。最初の `:` のみ `-` に置換)。
+確定した認識結果が `[HH:MM:SS] テキスト` の形式で `output/{DateTime}.txt` に追記される。`{DateTime}` は開始時刻 (ISO 8601 形式。すべての `:` を `-` に置換)。
 
 ## ライセンス
 

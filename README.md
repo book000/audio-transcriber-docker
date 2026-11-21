@@ -68,7 +68,7 @@ Chrome starts inside the container, the audio is played into the virtual microph
 
 ### 3. View the `output/{DateTime}.txt`
 
-Each final result is appended to `output/{DateTime}.txt` as `[HH:MM:SS] text`, where `{DateTime}` is the start time in ISO 8601 format with only the first `:` replaced by `-`.
+Each final result is appended to `output/{DateTime}.txt` as `[HH:MM:SS] text`, where `{DateTime}` is the start time in ISO 8601 format with every `:` replaced by `-`.
 
 ## License
 
