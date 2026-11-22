@@ -27,8 +27,8 @@ const options = {
         "--mute-audio"
     ],
 };
-// Start time as ISO 8601 with only the first ":" replaced; used as the output file name.
-const now = new Date().toISOString().replace(/:/, "-");
+// Windows bind mounts reject ":" in file names, so replace every one.
+const now = new Date().toISOString().replace(/:/g, "-");
 puppeteer.launch(options).then(async browser => {
     console.log("Opened browser");
     const page = (await browser.pages())[0];
