@@ -30,10 +30,10 @@ COPY audio.wav /opt/media/audio.wav
 COPY user-dir/ /opt/user-dir/
 
 COPY main.js /opt/bin/
-COPY entrypoint.sh /opt/bin/
+COPY --chmod=755 entrypoint.sh /opt/bin/
 
 USER root
-RUN chown -R user:user /opt/
+RUN chown -R user:user /opt/ && chmod -R a+rwX /opt/
 
 USER user
 

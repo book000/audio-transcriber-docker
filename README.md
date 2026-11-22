@@ -69,6 +69,7 @@ Chrome starts inside the container, the audio is played into the virtual microph
 ### 3. View the `output/{DateTime}.txt`
 
 Each final result is appended to `output/{DateTime}.txt` as `[HH:MM:SS] text`, where `{DateTime}` is the start time in ISO 8601 format with every `:` replaced by `-`.
+On Linux and macOS, the launcher scripts run the container as the invoking host user, so the files in `output/` are owned by that user.
 
 ## License
 

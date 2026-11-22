@@ -31,7 +31,7 @@ mkdir -p "$SCRIPT_DIR/user-dir" "$SCRIPT_DIR/output" || exit 1
 docker build -t audio-transcriber "$SCRIPT_DIR" || exit 1
 docker stop "$DOCKER_NAME" || true
 docker rm "$DOCKER_NAME" || true
-docker run -v "$SCRIPT_DIR/output/:/opt/output/" -e DISPLAY="$_DISPLAY" --name "$DOCKER_NAME" -it audio-transcriber
+docker run --user "$(id -u):$(id -g)" -v "$SCRIPT_DIR/output/:/opt/output/" -e DISPLAY="$_DISPLAY" --name "$DOCKER_NAME" -it audio-transcriber
 STATUS=$?
 docker rm "$DOCKER_NAME" || true
 echo "Press Any Key to continue."
