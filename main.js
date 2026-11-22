@@ -4,7 +4,8 @@ if (file == undefined) {
     file = "audio.wav";
 }
 if (!fs.existsSync(file)) {
-    console.log("File not found: " + file);
+    console.error("File not found: " + file);
+    process.exitCode = 1;
     return;
 }
 
@@ -146,9 +147,9 @@ puppeteer.launch(options).then(async browser => {
             childProcess.on("error", (err) => {
                 resolve({ error: err });
             });
-            childProcess.on("close", (code) => {
+            childProcess.on("close", (code, signal) => {
                 console.log(code);
-                resolve({ code });
+                resolve({ code, signal });
             });
         });
 
@@ -175,6 +176,12 @@ puppeteer.launch(options).then(async browser => {
         if (playback.error) {
             throw playback.error;
         }
+        if (playback.code === null) {
+            throw new Error("paplay terminated by signal " + playback.signal);
+        }
+        if (playback.code !== 0) {
+            throw new Error("paplay exited with code " + playback.code);
+        }
     } catch (err) {
         console.error(err);
         process.exitCode = 1;
@@ -198,4 +205,7 @@ puppeteer.launch(options).then(async browser => {
         }
         return hours + ':' + minutes + ':' + seconds;
     }
+}).catch(err => {
+    console.error(err);
+    process.exitCode = 1;
 });
